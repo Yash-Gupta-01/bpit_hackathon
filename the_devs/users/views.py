@@ -55,6 +55,7 @@ def contact(request):
         send_mail(data['subject'],message, '',['aryanjainak@gmail.com'] )
         messages.success(request,'Response Sent!,Thanks for contacting.')
         return HttpResponseRedirect(reverse('index:index'))
+    return render(request,'users/contact.html')
 
 def logout(request):
     auth_logout(request)
