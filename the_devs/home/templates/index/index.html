@@ -1,2 +1,105 @@
 {% extends "base.html" %}
-{% block title %} The Devs {% endblock title %}
+{% block title %}HOME {% endblock title %}
+{% load static %}
+{% block body %}
+
+<main class="main">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-image"></div>
+      <div class="hero-text">
+        <h1>Feeding the unprivileged</h1>
+        <p>
+          Help us feed the unprivileged!! Become a Volunteer today or Do you have some extra food ? Just click the 
+          button below to get a list of Volunteers in your area! No login required
+        </p>
+        <a href="#" class="button">Get a list of Volunteers</a> 
+      </div>
+    </div>
+  </section>
+  <!-- Latest Articels -->
+  <section class="articles">
+    <div class="container">
+      <div class="section-heading">
+        <h2>Latest Donations</h2>
+      </div>
+      <div class="articles-grid">
+        <div class="article">
+          <div class="article-image">
+            <img src="https://www.anandamevents.com/images/logo.png" alt="Article Image" />
+          </div>
+          <div class="article-text">
+            <div class="article-title">
+              <a href="#">
+                <h3>Anandam Event planners</h3>
+              </a>
+            </div>
+            <div class="article-description">
+              <p>
+               Helped By providing more than 20Kgs of Food from a Wedding. 
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="article">
+            <div class="article-image">
+              <img src="http://www.pearlimagica.in/images/logo.png" alt="Article Image" />
+            </div>
+            <div class="article-text">
+              <div class="article-title">
+                <a href="#">
+                  <h3>Pearl Imagica Co.</h3>
+                </a>
+              </div>
+              <div class="article-description">
+                <p>
+                 Provided food For around 3000+ children .
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="article">
+            <div class="article-image">
+              <img src="https://img1.wsimg.com/isteam/ip/227897cb-30c9-415c-9fac-e5931564bbdf/taaysalogo_big.png/:/rs=w:90,h:103,cg:true,m/cr=w:90,h:103/qt=q:95" alt="Article Image" />
+            </div>
+            <div class="article-text">
+              <div class="article-title">
+                <a href="#">
+                  <h3>Taaysa Event Planners.</h3>
+                </a>
+              </div>
+              <div class="article-description">
+                <p>
+                 Provided Left Over Food from their Huge Event which helped in feeding more than 5000+ people.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="article">
+            <div class="article-image">
+              <img src="https://showmakerz.co/images/logo.png" alt="Article Image" />
+            </div>
+            <div class="article-text">
+              <div class="article-title">
+                <a href="#">
+                  <h3>Show Makerz Co.</h3>
+                </a>
+              </div>
+              <div class="article-description">
+                <p>
+                 Helped in Feeding more than 5000 undernourished Children from various Communities
+                </p>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="{% static 'js/script.js' %}"></script>
+
+{% endblock body %}

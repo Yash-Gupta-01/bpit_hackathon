@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Login {% endblock title %}
+{% block script %}<link rel="stylesheet" href="{% static 'style/login.css' %}"> {% endblock script %}
+{% block body %}
+    <div class="form-wrap">
+		<div class="tabs">
+			<h3 class="login-tab"><a href="#login-tab-content">Login</a></h3>
+		</div><!--.tabs-->
+
+		<div class="tabs-content">
+			<!-- <div id="signup-tab-content" class="active">
+				<form class="signup-form" method="post">
+					{% csrf_token %}
+					<input type="text"  name="username"  required class="input" id="user_name" autocomplete="off" placeholder="Username">
+					<input type="email"  name="email"  required class="input" id="user_email" autocomplete="off" placeholder="Email">
+					<input type="password"  name="password"  required class="input" id="user_pass" autocomplete="off" placeholder="Password">
+					<input type="password"  name="confirm_password"  required class="input" id="user_pass" autocomplete="off" placeholder="Confirm Password">
+					<input type="submit" class="button" value="Sign Up">
+				</form>
+				<div class="help-text">
+					<p>By signing up, you agree to our</p>
+					<p><a href="#">Terms of service</a></p>
+				</div>
+			</div> -->
+
+			<div id="login-tab-content active ">
+				<form class="login-form"  method="post">
+					{% csrf_token %}
+					<input type="text"  name="username" required class="input" id="user_login" autocomplete="off" placeholder="Email or Username">
+					<input type="password"  name="password" required class="input" id="user_pass" autocomplete="off" placeholder="Password">
+					<input type="checkbox"  class="checkbox" id="remember_me">
+					<label for="remember_me">Remember me</label>
+
+					<input type="submit" class="button" value="Login">
+				</form><!--.login-form-->
+				<div class="help-text">
+					<p><a href="{% url 'password_reset' %}">Forget your password?</a></p>
+				</div>
+				<div class="help-text">
+					<p><a href="{% url 'users:register' %}">New to website signup now!</a></p>
+				</div><!--.help-text-->
+			</div><!--.login-tab-content-->
+		</div><!--.tabs-content-->
+	</div><!--.form-wrap-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{% static 'js/login.js' %}"></script>
+{% endblock body %}

@@ -12,13 +12,13 @@ form.addEventListener("keyup", () => {
     button.disabled = true;
   }
 });
-
+/*
 form.addEventListener("submit", e => {
   e.preventDefault();
   form.innerHTML =
     "<div class='confirmation'>Hi there! This form is currently not connected to any mailscript.</div>";
 });
-
+*/
 function checkTab(e) {
   if (e.keyCode === 9) {
     button.classList.add("show-outline");

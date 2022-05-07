@@ -14,17 +14,22 @@ def register(request):
         email=request.POST.get('email')
         password=request.POST.get('password')
         confirm_password=request.POST.get('confirm_password')
+        print(username,email)
         if password == confirm_password:
             if User.objects.filter(username=username).exists():
+                print('hmm')
                 messages.info(request,'Username Taken')
                 return HttpResponseRedirect(reverse('users:register'))
             elif len(password) <8:
+                print('hmm')
                 messages.info(request,'ATLEAST 8 CHARACTER PASSWORD NEEDED')
                 return HttpResponseRedirect(reverse('users:register'))
             elif User.objects.filter(email=email).exists():
+                print('hmm')
                 messages.info(request,'Email Taken')
                 return HttpResponseRedirect(reverse('users:register'))
             else:
+                print('nice')
                 entry=User.objects.create_user(username=username,email=email,password=password)
                 entry.save()
                 messages.success(request,'Account Created!')
@@ -60,4 +65,7 @@ def contact(request):
 def logout(request):
     auth_logout(request)
     messages.success(request,'Logout Successful')
-    return HttpResponseRedirect(reverse('home:index'))
+    return HttpResponseRedirect(reverse('index:index'))
+
+def about(request):
+    return render(request,'users/about.html')
