@@ -2,24 +2,24 @@
 *{
     margin: 0;
     padding: 0;
-    font-family: 'Lobster', cursive;
     box-sizing: border-box;
 }
 
-body{
-    min-height: 100vh;
+.about-page{
     display: flex;
+
     align-items: center;
-    justify-content: center;
-    background-color: #ffffff;
+    flex-wrap: nowrap   ;
+    margin: 5.5% 0%;
 }
 
-.about-section{
+
+.background{
     background: url(https://files.globalgiving.org/pfil/5067/ph_5067_93060.jpg?m=1479656879000) no-repeat left;
-    background-size: 55%;
+    background-size: 45%;
     background-color: #caf5bb;
     overflow: hidden;
-    padding: 100px 0;
+    padding: 50px 0;
 }
 
 .inner-container{
@@ -45,13 +45,13 @@ body{
 }
 
 
-@media screen and (max-width:1200px){
+@media screen and (max-width:1000px){
     .inner-container{
         padding: 80px;
     }
 }
 
-@media screen and (max-width:1000px){
+@media screen and (max-width:800px){
     .about-section{
         background-size: 100%;
         padding: 100px 40px;
@@ -61,7 +61,7 @@ body{
     }
 }
 
-@media screen and (max-width:600px){
+@media screen and (max-width:400px){
     .about-section{
         padding: 0;
     }

@@ -1,0 +1,29 @@
+{% load static %}
+{% block title %} volunteers {% endblock title %}
+{% block script %}<link rel="stylesheet" href="{% static 'style/become-volunteer.css' %}"> {% endblock script %}
+{% block body %}
+
+<div class="container">
+    <form id="contact"method="post">
+        {% csrf_token %}
+        <h3>Complete your profile</h3>
+        <fieldset>
+            <input placeholder="Enter your name" type="text" name="name" tabindex="1" required>
+        </fieldset>
+        <fieldset>
+            <input placeholder="Your Phone Number" type="tel" name="phone_no" tabindex="3" required>
+        </fieldset>
+        <h4>Select your district</h4>
+        <fieldset>
+            {% for dist in districts %}
+            <input type="radio"  name="district" value="{{dist.0}}">
+            <label for="district">{{dist.0}}</label><br>
+            {% endfor %}
+        </fieldset>
+        <fieldset>
+            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+        </fieldset>
+    </form>
+</div>
+
+{% endblock body %}

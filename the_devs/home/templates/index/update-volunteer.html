@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} volunteers {% endblock title %}
+{% block script %}<link rel="stylesheet" href="{% static 'style/become-volunteer.css' %}"> {% endblock script %}
+{% block body %}
+
+<div class="container">
+    <form id="contact" method="post">
+        {% csrf_token %}
+        <h3>Update your profile </h3>
+        <fieldset>
+            <input  type="text" name="name" placeholder="{{volunteer_update.name}}" tabindex="1" readonly required>
+        </fieldset>
+        <fieldset>
+            <input type="checkbox"  name="is_active" 
+            {% if user.volunteer.is_active %}
+            value="True" checked
+
+            {% else %}
+
+            value="False"
+            {% endif %}
+            >
+
+            <label for="active">I am currently active</label><br>
+        </fieldset>
+        <fieldset>
+            <input placeholder="Your Phone Number" value="123456789" type="tel" name="phone_number" tabindex="3" required>
+        </fieldset>
+        <fieldset>
+            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Save</button>
+        </fieldset>
+    </form>
+</div>
+
+{% endblock body %}

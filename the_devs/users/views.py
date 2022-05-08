@@ -17,19 +17,15 @@ def register(request):
         print(username,email)
         if password == confirm_password:
             if User.objects.filter(username=username).exists():
-                print('hmm')
                 messages.info(request,'Username Taken')
                 return HttpResponseRedirect(reverse('users:register'))
             elif len(password) <8:
-                print('hmm')
                 messages.info(request,'ATLEAST 8 CHARACTER PASSWORD NEEDED')
                 return HttpResponseRedirect(reverse('users:register'))
             elif User.objects.filter(email=email).exists():
-                print('hmm')
                 messages.info(request,'Email Taken')
                 return HttpResponseRedirect(reverse('users:register'))
             else:
-                print('nice')
                 entry=User.objects.create_user(username=username,email=email,password=password)
                 entry.save()
                 messages.success(request,'Account Created!')
@@ -57,7 +53,7 @@ def contact(request):
         New message : {}
         from : {}
         '''.format(data['message'],data['email'])
-        send_mail(data['subject'],message, '',['aryanjainak@gmail.com'] )
+        send_mail(data['subject'],message, '',['ubunga255@gmail.com'] )
         messages.success(request,'Response Sent!,Thanks for contacting.')
         return HttpResponseRedirect(reverse('index:index'))
     return render(request,'users/contact.html')
