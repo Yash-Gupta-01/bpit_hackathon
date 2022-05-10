@@ -39,7 +39,11 @@
       <!-- CTA Button -->
       {% if user.is_authenticated %}
       <a href="{% url 'users:logout' %}" class="button hide-for-mobile">{{user.username}}</a>
+      {% if user.volunteer %}
+      <a href="{% url 'index:update_volunteer' %}" class="button hide-for-mobile">Volunteer Profile</a>
+      {% else %}
       <a href="{% url 'index:become_volunteer' %}" class="button hide-for-mobile">Become a volunteer</a>
+      {% endif %}
       {% else %}
       <a href="{% url 'users:login' %}" class="button hide-for-mobile">Volunteer Login</a>
       {% endif %}

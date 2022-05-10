@@ -9,23 +9,18 @@
         {% csrf_token %}
         <h3>Update your profile </h3>
         <fieldset>
-            <input  type="text" name="name" placeholder="{{volunteer_update.name}}" tabindex="1" readonly required>
+            <input  type="text" name="name" value="{{volunteer_update.name}}" tabindex="1" readonly required>
         </fieldset>
         <fieldset>
-            <input type="checkbox"  name="is_active" 
-            {% if user.volunteer.is_active %}
-            value="True" checked
-
-            {% else %}
-
-            value="False"
-            {% endif %}
-            >
-
+            <input type="checkbox"  name="is_active" value="True">
             <label for="active">I am currently active</label><br>
         </fieldset>
         <fieldset>
-            <input placeholder="Your Phone Number" value="123456789" type="tel" name="phone_number" tabindex="3" required>
+            <input type="checkbox"  name="is_active" value="False">
+            <label for="active">I am currently busy</label><br>
+        </fieldset>
+        <fieldset>
+            <input placeholder="Your Phone Number" value="{{volunteer_update.phone_no}}" type="tel" name="phone_no" tabindex="3" required>
         </fieldset>
         <fieldset>
             <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Save</button>

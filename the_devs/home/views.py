@@ -34,28 +34,29 @@ def volunteers(request):
     v_query=Volunteer.objects.filter(is_active=True)
     return render(request,'index/volunteers.html',{'v_query':v_query})
 
-'''@login_required
-def update_volunteer(request,id):
-    volunteer_update=Volunteer.objects.filter(id=id)
+@login_required
+def update_volunteer(request):
+    volunteer_update=Volunteer.objects.get(id=request.user.volunteer.id)
     print(volunteer_update)
     #volunteer_update=get_object_or_404(Volunteer,id=request.user.id)
     if request.method == 'POST':
         phone_no=request.POST.get('phone_no')
         is_active=request.POST.get('is_active')
-        if Volunteer.objects.filter(phone_no=phone_no).exists():
+        print(is_active)
+        """if Volunteer.objects.filter(phone_no=phone_no).exists():
             messages.success(request,'Phone no. taken')
-            return HttpResponseRedirect(reverse('index:update_volunteer'))
+            return HttpResponseRedirect(reverse('index:update_volunteer'))"""
         volunteer_update.phone_no=phone_no
         volunteer_update.is_active=is_active
         volunteer_update.save()
         messages.success(request,'Updated!')
-        return HttpResponseRedirect(reverse('index:index',args=[volunteer_update.id]))
-    return render(request,'index/update-volunteer.html',{'volunteer_update':volunteer_update})'''
+        return HttpResponseRedirect(reverse('index:index'))
+    return render(request,'index/update-volunteer.html',{'volunteer_update':volunteer_update})
 
 def search(request):
     if request.method == "POST":
         searched=request.POST.get('searched')
-        q1=Volunteer.objects.filter(Q(district__startswith=searched) | Q(district__icontains=searched))
+        q1=Volunteer.objects.filter(Q(district__startswith=searched) | Q(district__icontains=searched)).filter(is_active=True)
         return render(request,'index/volunteer-searched.html',{'q1':q1,'searched':searched})
     #return render(request,'index/volunteers.html')
     return HttpResponseRedirect(reverse('index:volunteers'))

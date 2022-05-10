@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from .models  import Profile
+from django.shortcuts import render,get_object_or_404
 from django.http  import HttpResponseRedirect
 from django.contrib import messages
 from django.urls import reverse
@@ -6,7 +7,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout as auth_logout
 from .models import Contact
 from django.core.mail import send_mail
-
+from ratelimit.decorators import ratelimit
+from django.contrib.auth.decorators import login_required
 
 def register(request):
     if request.method=='POST':
@@ -35,6 +37,7 @@ def register(request):
             return HttpResponseRedirect(reverse('users:register'))
     return render(request,'users/signup.html')
 
+@ratelimit(key='ip',rate='5/hr',block=True,method='POST')
 def contact(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -65,3 +68,22 @@ def logout(request):
 
 def about(request):
     return render(request,'users/about.html')
+
+@login_required
+def profile(request,user_id):
+    #profile=Profile.objects.get(id=user_id)
+    profile=get_object_or_404(Profile,id=user_id)
+    return render(request,'users/profile.html',{'profile':profile})
+
+@login_required
+def profile_update(request,user_id):
+    profile_edit=get_object_or_404(Profile,id=user_id)
+    if request.method == 'POST':
+        about=request.POST.get('about')
+        image=request.POST.get('image')
+        profile_edit.about=about
+        profile_edit.image=image
+        profile_edit.save()
+        messages.success(request,'Profile updated Successfully')
+        return HttpResponseRedirect(reverse('users:profile',args=[profile_edit.id]))
+    return render(request,'users/profile-update.html',{'profile_edit':profile_edit})
