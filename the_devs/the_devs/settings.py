@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-8@tmk(ef5krrij@^2lk$#25@*w4t*!o0wt%tyjih+!zsoix)mc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app','.now.sh']
 
 
 # Application definition
@@ -114,6 +114,7 @@ TIME_ZONE = 'Asia/Kolkata'
 USE_I18N = True
 
 USE_TZ = True
+
 
 
 # Static files (CSS, JavaScript, Images)
