@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout as auth_logout
 from .models import Contact
 from django.core.mail import send_mail
-from ratelimit.decorators import ratelimit
+from ratelimit import limits
 from django.contrib.auth.decorators import login_required
 
 def register(request):
@@ -37,7 +37,8 @@ def register(request):
             return HttpResponseRedirect(reverse('users:register'))
     return render(request,'users/signup.html')
 
-@ratelimit(key='ip',rate='5/hr',block=True,method='POST')
+FIFTEEN_MINUTES=900
+@limits(calls=15, period=FIFTEEN_MINUTES)
 def contact(request):
     if request.method == 'POST':
         name = request.POST.get('name')

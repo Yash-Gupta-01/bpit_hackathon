@@ -14,12 +14,11 @@
             <input placeholder="Your Phone Number" type="tel" name="phone_no" tabindex="3" required>
         </fieldset>
         <h4>Select your district</h4>
-        <fieldset>
-            {% for dist in districts %}
-            <input type="radio"  name="district" value="{{dist.0}}">
-            <label for="district">{{dist.0}}</label><br>
+        <select name="district">
+            {% for district in districts %}
+                <option value="{{ district.0 }}">{{ district.1 }}</option>
             {% endfor %}
-        </fieldset>
+        </select>
         <fieldset>
             <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
         </fieldset>

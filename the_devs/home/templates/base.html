@@ -38,7 +38,7 @@
       </div>
       <!-- CTA Button -->
       {% if user.is_authenticated %}
-      <a href="{% url 'users:logout' %}" class="button hide-for-mobile">{{user.username}}</a>
+      <a href="{% url 'users:logout' %}" class="button hide-for-mobile">Logout</a>
       {% if user.volunteer %}
       <a href="{% url 'index:update_volunteer' %}" class="button hide-for-mobile">Volunteer Profile</a>
       {% else %}
@@ -60,22 +60,22 @@
 {% block body %} {% endblock body %}
 
 <!-- Footer -->
-<footer class="footer">
-    <div class="container">
-      <div class="footer-logo">
-        <a href="#">
-          <img src="{% static 'logo.png' %}" alt="logo here" width="150px"/>
-        </a>
+<footer class="footer mt-5">
+  <div class="container">
+      <div class="footer-logo mb-3">
+          <a href="#">
+              <img src="{% static 'logo.png' %}" alt="logo here" width="150px"/>
+          </a>
       </div>
-      <div class="footer-links col1">
-        <a href="{% url 'users:about' %}">About Us</a>
-        <a href="% url 'users:contact' %}">Contact</a>
+      <div class="footer-links col1 mb-3">
+          <a href="{% url 'users:about' %}" class="d-block mb-2">About Us</a>
+          <a href="{% url 'users:contact' %}" class="d-block mb-2">Contact</a>
       </div>
       <div class="footer-copyright">
-        <p>© the devs. All Rights Reserved</p>
+          <p>© the devs. All Rights Reserved</p>
       </div>
-    </div>
-  </footer>
-  </body>
-  <script src="{% static 'js/script.js' %}"></script>
-  </html>
+  </div>
+</footer>
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

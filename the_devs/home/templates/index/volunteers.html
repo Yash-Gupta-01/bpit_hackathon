@@ -1,55 +1,49 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %} volunteers {% endblock title %}
-{% block script %}<link rel="stylesheet" href="{% static 'style/volunteers.css' %}">
+{% block script %}
+<link rel="stylesheet" href="{% static 'style/volunteers.css' %}">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
-        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous" />
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-        </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
-        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous">
-        </script>
-         {% endblock script %}
+    integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous" />
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+    integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous">
+</script>
+{% endblock script %}
 {% block body %}
 
-<div class="row">
-
-    <div class="col-5" >
-
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
-            viewBox="0 0 16 16">
-            <path
-                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-        </svg>
-    </div>
-    <div class="col-7">
-    <form method="POST" action="{% url 'index:search' %}">
-        {% csrf_token %}
-        <input type="text"  name="searched" id="myInput"  placeholder="Search for district"
-            title="Type in a name"
-            style="padding:20px;">
-    </div>
-</form>
-</div><br>
-
-
-
-    <table class="table-fill">
-        <thead>
-            <tr>
-                
-                <th class="text-left">Name</th>
-                <th class="text-left">Phone Number</th>
-            </tr>
-        </thead>
-        <tbody class="table-hover">
-            {% for i in v_query %}
-            <tr>
-                <td class="text-left">{{i.name}}</td>
-                <td class="text-left">{{i.phone_no}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
+<div class="row mt-4 justify-content-center">
+    <div class="col-8">
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>District</th>
+                    <th >Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for volunteer in v_query %}
+                <tr>
+                    <td>{{ volunteer.name }}</td>
+                    <td>{{ volunteer.district }}</td>
+                    <td>
+                        <button class="btn btn-primary" onclick="showPhoneNumber('{{ volunteer.phone_no }}')">Contact
+                            Them</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
+    </div>
+</div>
+
+<script>
+    function showPhoneNumber(phoneNumber) {
+        alert('Phone Number: ' + phoneNumber);
+    }
+</script>
+
 {% endblock body %}

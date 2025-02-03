@@ -146,17 +146,18 @@ class Volunteer(models.Model):
     phone_no
     district
     is_active
-    author/volunteered_by"""
-    name=models.CharField(max_length=100,blank=False,null=False)
-    phone_no=PhoneField(unique=True,blank=False,null=False)
-    district=models.CharField(max_length=100,choices=district_choices,blank=False,null=False)
-    is_active=models.BooleanField(default=True)
-    volunteered_by=models.OneToOneField(User,on_delete=models.CASCADE)
-    joined_at=models.DateTimeField(auto_now_add=True)
+    author/volunteered_by
+    """
+    name = models.CharField(max_length=100, blank=False, null=False)
+    phone_no = PhoneField(unique=True, blank=False, null=False)
+    district = models.CharField(max_length=100, choices=district_choices, blank=False, null=False)
+    is_active = models.BooleanField(default=True)
+    volunteered_by = models.OneToOneField(User, on_delete=models.CASCADE)
+    joined_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return str(self.name)
+        return self.name  # Ensured proper string representation
 
     class Meta:
-        verbose_name_plural='Volunteer'
-        ordering=['-joined_at']
+        verbose_name_plural = 'Volunteer'
+        ordering = ['-joined_at']

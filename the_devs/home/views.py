@@ -13,32 +13,30 @@ def index(request):
 
 @login_required
 def become_volunteer(request):
-    #districts = map(lambda v: v.district, Volunteer.objects.all())
-    #{'districts':set(districts)}
-    districts=district_choices
+    districts = district_choices
     if request.method == 'POST':
-        name=request.POST.get('name')
-        phone_no=request.POST.get('phone_no')
-        district=request.POST.get('district')
-        volunteered_by=request.user
+        name = request.POST.get('name')
+        phone_no = request.POST.get('phone_no')
+        district = request.POST.get('district')
+        volunteered_by = request.user
         if Volunteer.objects.filter(phone_no=phone_no).exists() or Volunteer.objects.filter(volunteered_by=volunteered_by).exists():
-            messages.success(request,'Data Need to be unique OR you already are a Volunteer in this account')
+            messages.success(request, 'Data Need to be unique OR you already are a Volunteer in this account')
             return HttpResponseRedirect(reverse('index:become_volunteer'))
-        entry=Volunteer(name=name,phone_no=phone_no,district=district,volunteered_by=volunteered_by)
+        entry = Volunteer(name=name, phone_no=phone_no, district=district, volunteered_by=volunteered_by)
         entry.save()
-        messages.success(request,'Thanks ,now you are a volunteer')
+        messages.success(request, 'Thanks, now you are a volunteer')
         return HttpResponseRedirect(reverse('index:index'))
-    return render(request,'index/become-volunteer.html',{'districts':districts})
+    return render(request, 'index/become-volunteer.html', {'districts': districts})
 
 def volunteers(request):
-    v_query=Volunteer.objects.filter(is_active=True)
-    return render(request,'index/volunteers.html',{'v_query':v_query})
+    v_query = Volunteer.objects.filter(is_active=True)
+    return render(request, 'index/volunteers.html', {'v_query': v_query})
 
 @login_required
 def update_volunteer(request):
     volunteer_update=Volunteer.objects.get(id=request.user.volunteer.id)
-    print(volunteer_update)
-    #volunteer_update=get_object_or_404(Volunteer,id=request.user.id)
+    volunteer_update = get_object_or_404(Volunteer, id=request.user.volunteer.id)  # Updated to use get_object_or_404
+    # print(volunteer_update)  # Removed print statement
     if request.method == 'POST':
         phone_no=request.POST.get('phone_no')
         is_active=request.POST.get('is_active')
